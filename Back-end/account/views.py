@@ -1,11 +1,14 @@
-from django.shortcuts import render
-from rest_framework.decorators import api_view
+from datetime import datetime, timedelta
+from django.shortcuts import get_object_or_404
+from rest_framework.decorators import api_view, permission_classes
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
 from .serializer import UserSerializer, SignUpSerializer
-
+from rest_framework.permissions import IsAuthenticated
+from django.utils.crypto import get_random_string
+from django.core.mail import send_mail
 
 
 
@@ -46,3 +49,81 @@ def register(request):
             user.errors,
             status=status.HTTP_400_BAD_REQUEST
             )
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def current_user(request):
+    user = UserSerializer(request.user, many=False)
+    return Response(user.data)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_user(request):
+    user = request.user
+    data = request.data
+    user.first_name = data['first_name']
+    user.last_name = data['last_name']
+    user.email = data['email']
+    user.username = data['username']
+    
+    if 'password' in data != "":
+        user.password = make_password(data['password'])
+    user.save()
+    serialzer = UserSerializer(user, many=False)
+    return Response(serialzer.data)
+
+
+def get_current_host(request):
+    """
+    This function retrieves the current host URL based on the request.
+
+    Parameters:
+    request (HttpRequest): The request object containing information about the client.
+
+    Returns:
+    str: The current host URL in the format 'protocol://host/'.
+    """
+    protocol = request.is_secure() and 'https' or 'http'
+    host = request.get_host()
+    return f'{protocol}://{host}/'
+
+
+@api_view(['POST'])
+def forget_pass(request):
+    data = request.data
+    user = get_object_or_404(User, email=data['email'])
+    token = get_random_string(40)
+    expire_date = datetime.now() + timedelta(minutes=30)
+    user.profile.reset_password_token = token
+    user.profile.reset_password_expire = expire_date
+    user.profile.save()
+    host = get_current_host(request)
+    link = f"{host}api/reset_password/{token}"
+    body = f"Your password reset link is : {link}"
+    send_mail(
+        "Password reset link",
+        body,
+        "nagib@yahoo.com",
+        [data['email']]
+    )
+    return Response({'details': 'Password reset sent to {email}'.format(email=data['email'])})
+
+
+@api_view(['POST'])
+def reset_pass(request, token):
+    data = request.data
+    user = get_object_or_404(User, profile__reset_password_token = token)
+    
+    if user.profile.reset_password_expire.replace(tzinfo=None) < datetime.now():
+        return Response({'error': 'Token expired. Please request a new password reset link.'})
+    if data['password'] != data['confirmPassword']:
+        return Response({'error': 'Passwords do not match'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    user.password = make_password(data['password'])
+    user.profile.reset_password_token = ""
+    user.profile.reset_password_expire = None
+    user.profile.save()
+    user.save()
+    return Response({'details': 'Password reset done.'}, status=status.HTTP_200_OK)
