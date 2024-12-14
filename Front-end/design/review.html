@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews -Shyaka</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .review {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+        .review:last-child {
+            border-bottom: none;
+        }
+        .review h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #333;
+        }
+        .review p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .review .rating {
+            color: #e67e22;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Customer Reviews</h1>
+    </header>
+    <div class="container">
+        <h2>What Our Customers Say</h2>
+        
+        
+        <div class="review">
+            <h3>Youssef</h3>
+            <p class="rating">★★★★☆</p>
+            <p>Great quality clothing and fast delivery!</p>
+        </div>
+        <div class="review">
+            <h3>Roeya</h3>
+            <p class="rating">★★★★★</p>
+            <p>Amazing styles! I love the new collection.</p>
+        </div>
+        <div class="review">
+            <h3>Mariam</h3>
+            <p class="rating">★★★☆☆</p>
+            <p>Good products but delivery took a bit longer than expected.</p>
+        </div>
+        
+    
+        <form>
+            <h3>Leave a Review</h3>
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            
+            <label for="rating">Rating</label>
+            <select id="rating" name="rating" required>
+                <option value="" disabled selected>Choose a rating</option>
+                <option value="5">★★★★★</option>
+                <option value="4">★★★★☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="1">★☆☆☆☆</option>
+            </select>
+            
+            <label for="review">Your Review</label>
+            <textarea id="review" name="review" rows="4" placeholder="Write your review here..." required></textarea>
+            
+            <button type="submit">Submit Review</button>
+        </form>
+    </div>
+    <footer>
+        <p>&copy; 2024 Shyaka. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
