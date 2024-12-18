@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .serializers import ProductSerializer
 from rest_framework import status
-from .models import Product, Review
+from .models import Product
 from .filters import ProductFilter
 from rest_framework.pagination import PageNumberPagination
 from django.db.models import Avg
@@ -109,60 +109,60 @@ def delete_product(request, pk):
     return Response({'details': "proudct Deleted successfully"}, status=status.HTTP_200_OK)
 
 
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def create_review(request, pk):
-    product = get_object_or_404(Product, id=pk)
-    user = request.user
-    data = request.data
-    review = product.reviews.filter(user=user)
+# @api_view(["POST"])
+# @permission_classes([IsAuthenticated])
+# def create_review(request, pk):
+#     product = get_object_or_404(Product, id=pk)
+#     user = request.user
+#     data = request.data
+#     review = product.reviews.filter(user=user)
 
 
-    if data['rating'] <=0 or data['rating'] >10:
-        return Response({'error': 'Rating must be greater than 0 and smaller than 10'},
-                        status=status.HTTP_400_BAD_REQUEST)
-    elif review.exists():
-        new_review = {'rating':data['rating'], "comment":data['comment'] }
-        review.update(**new_review)
+#     if data['rating'] <=0 or data['rating'] >10:
+#         return Response({'error': 'Rating must be greater than 0 and smaller than 10'},
+#                         status=status.HTTP_400_BAD_REQUEST)
+#     elif review.exists():
+#         new_review = {'rating':data['rating'], "comment":data['comment'] }
+#         review.update(**new_review)
 
-        rating = product.reviews.aggregate(avg_rating = Avg('rating'))
-        product.rating = rating['avg_rating']
-        product.save()
+#         rating = product.reviews.aggregate(avg_rating = Avg('rating'))
+#         product.rating = rating['avg_rating']
+#         product.save()
         
-        return Response({'details': 'Review updated successfully'})
+#         return Response({'details': 'Review updated successfully'})
     
-    else:
-        Review.objects.create(
-            user=user,
-            product=product,
-            rating=data['rating'],
-            comment=data['comment']
-        )
-        rating = product.reviews.aggregate(avg_rating = Avg('rating'))
-        product.rating = rating['avg_rating']
-        product.save()
-        return Response({'details': 'Review created successfully'})
+#     else:
+#         Review.objects.create(
+#             user=user,
+#             product=product,
+#             rating=data['rating'],
+#             comment=data['comment']
+#         )
+#         rating = product.reviews.aggregate(avg_rating = Avg('rating'))
+#         product.rating = rating['avg_rating']
+#         product.save()
+#         return Response({'details': 'Review created successfully'})
 
-@api_view(["DELETE"])
-@permission_classes([IsAuthenticated])
-def delete_reviews(request, pk):
-    user = request.user
-    product = get_object_or_404(Product, id=pk)
-    review = product.reviews.filter(user=user)
+# @api_view(["DELETE"])
+# @permission_classes([IsAuthenticated])
+# def delete_reviews(request, pk):
+#     user = request.user
+#     product = get_object_or_404(Product, id=pk)
+#     review = product.reviews.filter(user=user)
     
-    if review.exists():
-        review.delete()
-        rating = product.reviews.aggregate(avg_rating = Avg('rating'))
+#     if review.exists():
+#         review.delete()
+#         rating = product.reviews.aggregate(avg_rating = Avg('rating'))
 
-        if rating['avg_rating'] is None:
-            product.rating = 0
-        else:
-            product.rating = rating['avg_rating']
+#         if rating['avg_rating'] is None:
+#             product.rating = 0
+#         else:
+#             product.rating = rating['avg_rating']
 
-        product.save()
+#         product.save()
 
-        return Response({'details': 'Review deleted'})
-    else:
-        return Response({'error': 'No review found for this user'},
-                        status=status.HTTP_400_BAD_REQUEST)
+#         return Response({'details': 'Review deleted'})
+#     else:
+#         return Response({'error': 'No review found for this user'},
+#                         status=status.HTTP_400_BAD_REQUEST)
 

@@ -64,10 +64,10 @@ const Navbar = () => {
             Shop Now
           </a>
           <ul className="dropdown-menu">
-            <li><a className="dropdown-item">Men</a></li>
+            <li><Link to="/menproducts" className="dropdown-item">Men</Link></li>
 
             <li><hr className="dropdown-divider" /></li>
-            <li><a className="dropdown-item">Women</a></li>
+            <li><Link to="/womenproducts" className="dropdown-item">Women</Link></li>
           </ul>
         </li>
         

@@ -5,8 +5,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import Home from './Home';
 import Dashboard from './Dashboard.js';
-import Navbar from "./Navbar.js";
+import Navbar from "./Navbar.js"
 import AboutUs from "./AboutUs.js";
+import MenProducts from "./MenProduct.js";
+import WomenProducts from "./WomenProduct.js";
+import ProductInfo from "./ProductInfo.js";
 
 
 function App() {
@@ -20,6 +23,10 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/login" element={<Login />} />
       <Route path="/aboutus" element={<AboutUs />} />
+      <Route path="/menproducts" element={<MenProducts />} />
+      <Route path="/womenproducts" element={<WomenProducts />} />
+      <Route path="/product/:id" element={<ProductInfo />} />
+
     </Routes>
   </div>
 </BrowserRouter>
