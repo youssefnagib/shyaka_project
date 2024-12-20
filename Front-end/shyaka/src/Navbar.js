@@ -71,7 +71,7 @@ const Navbar = () => {
           </ul>
         </li>
         
-        <li style={menuItemStyle}><a href="#cart" style={menuLinkStyle}>Cart</a></li>
+        <li style={menuItemStyle}><Link to="/cart" style={menuLinkStyle}>Cart</Link></li>
         <li style={menuItemStyle}><Link to='/aboutus' style={menuLinkStyle}>About us</Link></li>
       </ul>
       {error && <div style={{ color: 'red' }}>{error}</div>} {/* Display error if any */}

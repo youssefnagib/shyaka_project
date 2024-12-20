@@ -1,0 +1,72 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .nav-btn {
+    background-color: #f4f4f4;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .nav-btn.active {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .nav-btn:hover {
+    background-color: #555;
+    color: #fff;
+  }
+  
+  .content {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  .profile-page, .orders-page {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  .user-data p {
+    margin: 10px 0;
+  }
+  
+  .logout-btn {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background-color: #c9302c;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+  

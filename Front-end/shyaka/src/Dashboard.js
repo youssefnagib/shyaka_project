@@ -1,12 +1,14 @@
-import fetchUserData from './UserData';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import fetchUserData from './UserData';
+import './Dashboard.css';
 
 const Dashboard = () => {
   const [userAvailable, setUserAvailable] = useState(false);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [activePage, setActivePage] = useState('profile'); // Track active page
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,9 +43,9 @@ const Dashboard = () => {
   const handleLogout = () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
+    window.location.reload();
     setUserAvailable(false);
     setUserData(null);
-    window.location.reload();
     navigate('/login');
   };
 
@@ -52,35 +54,51 @@ const Dashboard = () => {
   }
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Welcome to the Shyaka dashboard</p>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {userData ? (
-        <>
-          <p>Your first name is: {userData.first_name}</p>
-          <p>Your last name is: {userData.last_name}</p>
-          <p>Your email is: {userData.email}</p>
-          <p>Your username is: {userData.username}</p>
-        </>
-      ) : (
-        <p>Loading user data...</p>
-      )}
-      <button onClick={handleLogout} style={ctaStyle}>
+    <div className="dashboard-container">
+      <div className="navbar">
+        <button
+          className={`nav-btn ${activePage === 'profile' ? 'active' : ''}`}
+          onClick={() => setActivePage('profile')}
+        >
+          Profile
+        </button>
+        <button
+          className={`nav-btn ${activePage === 'orders' ? 'active' : ''}`}
+          onClick={() => setActivePage('orders')}
+        >
+          My Orders
+        </button>
+      </div>
+
+      <div className="content">
+        {activePage === 'profile' ? (
+          <div className="profile-page">
+            <h1>Profile Page</h1>
+            {error && <p className="error">{error}</p>}
+            {userData ? (
+              <div className="user-data">
+                <p><strong>First Name:</strong> {userData.first_name}</p>
+                <p><strong>Last Name:</strong> {userData.last_name}</p>
+                <p><strong>Email:</strong> {userData.email}</p>
+                <p><strong>Username:</strong> {userData.username}</p>
+              </div>
+            ) : (
+              <p>Loading user data...</p>
+            )}
+          </div>
+        ) : (
+          <div className="orders-page">
+            <h1>My Orders</h1>
+            <p>You currently have no orders.</p>
+          </div>
+        )}
+      </div>
+
+      <button onClick={handleLogout} className="logout-btn">
         Log Out
       </button>
     </div>
   );
-};
-
-const ctaStyle = {
-  backgroundColor: '#938d89',
-  color: '#222',
-  padding: '10px 20px',
-  textDecoration: 'none',
-  fontWeight: 'bold',
-  borderRadius: '5px',
-  transition: 'background-color 0.3s, color 0.3s',
 };
 
 export default Dashboard;

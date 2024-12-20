@@ -15,7 +15,6 @@ const ProductsInfoModel = (url) => {
           return response.json();
         })
         .then((data) => {
-          console.log(data); // For debugging purposes
           
           // Check if 'products' exists in the data and access its properties
           if (data && data.products) {

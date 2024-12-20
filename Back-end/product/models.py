@@ -2,12 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 
-# class Size(models.TextChoices):
-#     SMALL = 'S', 'Small'
-#     MEDIUM = 'M', 'Medium'
-#     LARGE = 'L', 'Large'
-#     XLARGE = 'XL', 'Extra Large'
-
 
 class Category(models.TextChoices):
     Pants = 'pants'
@@ -15,11 +9,7 @@ class Category(models.TextChoices):
     Tops = 'tops'
 
 
-# class Color(models.TextChoices):
-#     GRAY = 'gray'
-#     WHITE = 'white'
-#     BLACK = 'Black'
-#     CAFE = 'CAFE'
+
 
 class Gender(models.TextChoices):
     MALE = 'Male'

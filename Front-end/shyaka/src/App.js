@@ -10,7 +10,8 @@ import AboutUs from "./AboutUs.js";
 import MenProducts from "./MenProduct.js";
 import WomenProducts from "./WomenProduct.js";
 import ProductInfo from "./ProductInfo.js";
-
+import Cart from "./Cart.js";
+import Checkout from "./Checkout.js";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/checkout" element={<Checkout />} />
       <Route path="/aboutus" element={<AboutUs />} />
       <Route path="/menproducts" element={<MenProducts />} />
       <Route path="/womenproducts" element={<WomenProducts />} />

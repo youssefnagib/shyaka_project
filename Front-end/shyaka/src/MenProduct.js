@@ -28,7 +28,7 @@ const MenProducts = () => {
             products.map((product) => (
               <div key={product.id} style={productCardStyles}>
                 <img
-                  src={product.image}
+                  src={'http://127.0.0.1:8000'+product.image}
                   alt={product.name}
                   style={productImageStyles}
                 />

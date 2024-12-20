@@ -1,0 +1,79 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+header {
+    background-color: #888585;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+input, select {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+.order-summary {
+    margin-top: 20px;
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+}
+.order-summary h3 {
+    margin: 0;
+    margin-bottom: 10px;
+}
+.order-summary p {
+    margin: 5px 0;
+    color: #555;
+}
+.btn {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+}
+.btn:hover {
+    background-color: #555;
+}
+footer {
+    background-color: #a8a2a2;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}

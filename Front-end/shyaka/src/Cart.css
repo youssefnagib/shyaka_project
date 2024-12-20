@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+table th, table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+table th {
+    background-color: #333;
+    color: white;
+}
+table td img {
+    width: 80px;
+    height: auto;
+    border-radius: 8px;
+}
+.total {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+.btn:hover {
+    background-color: #555;
+}
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+footer {
+    background-color: #a8a2a2;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}

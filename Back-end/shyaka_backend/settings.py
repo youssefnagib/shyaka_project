@@ -38,11 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
     'product.apps.ProductConfig',
+    'account.apps.AccountConfig',
+    'order.apps.OrderConfig',
+    'rest_framework',
     'django_filters',
     'rest_framework_simplejwt',
-    'account.apps.AccountConfig',
     'corsheaders',
 ]
 
