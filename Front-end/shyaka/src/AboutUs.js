@@ -38,11 +38,34 @@ const AboutUs = () => {
                     </div>
                 </div>
             </section>
+        <section id="contact" style={sectionStyle}>
+        <h2 className="section-title" style={sectionTitleStyle}>Contact Us</h2>
+        <p style={centerTextStyle}>
+            Email: <a style={color} href="mailto:shyaka@fashionhub.com">shyaka@fashionhub.com</a>
+        </p>
+        <p style={centerTextStyle}>Phone: 0101010101019</p>
+        </section>
             <footer className="about-footer">
-                <p>&copy; 2024 Shyaka. All Rights Reserved.</p>
-            </footer>
+        <p>&copy; 2024 Shyaka. All Rights Reserved.</p>
+        </footer>
         </div>
     );
+};
+const color={
+    color: '"#a2a8a8"'
+}
+const sectionStyle = {
+    padding: '20px',
+};
+
+const sectionTitleStyle = {
+    textAlign: 'center',
+    fontSize: '28px',
+    marginBottom: '20px',
+};
+
+const centerTextStyle = {
+    textAlign: 'center',
 };
 
 export default AboutUs;

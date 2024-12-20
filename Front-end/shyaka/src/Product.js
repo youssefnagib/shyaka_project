@@ -3,14 +3,14 @@ import ProductModel from "./ProductModel";
 import { Link } from "react-router-dom";
 import LOADING from "./loading.gif"
 
-const MenProducts = () => {
+const Products = () => {
   const { isWaiting, serverError, products } = ProductModel(
-    "http://127.0.0.1:8000/api/products/men/"
+    "http://127.0.0.1:8000/api/products/"
   );
 
   // Conditional rendering based on loading state and errors
   if (isWaiting) {
-    return <div style={loading}><img src={LOADING} alt="loading" style={loadingImageStyles} /></div>;
+    return <div style={loading}><img src={LOADING} alt="loading" style={loadingImageStyles} /></div>;;
   }
 
   if (serverError) {
@@ -20,10 +20,10 @@ const MenProducts = () => {
   return (
     <div>
       <header style={headerStyles}>
-        <h1>Men's Collection</h1>
+        <h1>Ours' Collection</h1>
       </header>
       <div style={containerStyles}>
-        <h2 style={sectionTitleStyles}>Explore Our Latest Men's Fashion</h2>
+        <h2 style={sectionTitleStyles}>Explore Our Latest Fashion</h2>
         <div style={productsContainerStyles}>
           {products.length > 0 ? (
             products.map((product) => (
@@ -61,6 +61,21 @@ const headerStyles = {
   padding: "20px 0",
 };
 
+const loadingImageStyles = {
+    justifyContent: "center",
+    alignSelf: "center",
+    width: "25%",
+    textAlign: "center",
+    borderRadius: "8px",
+    height: "auto",
+  };
+  const loading = {
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex",
+    height: "550px",
+  }
+
 const containerStyles = {
   padding: "20px",
   maxWidth: "1200px",
@@ -96,20 +111,6 @@ const productImageStyles = {
   borderRadius: "8px",
   height: "auto",
 };
-const loadingImageStyles = {
-  justifyContent: "center",
-  alignSelf: "center",
-  width: "25%",
-  textAlign: "center",
-  borderRadius: "8px",
-  height: "auto",
-};
-const loading = {
-  alignItems: "center",
-  justifyContent: "center",
-  display: "flex",
-  height: "550px",
-}
 
 const productNameStyles = {
   fontSize: "20px",
@@ -148,4 +149,4 @@ const footerStyles = {
   marginTop: "20px",
 };
 
-export default MenProducts;
+export default Products;

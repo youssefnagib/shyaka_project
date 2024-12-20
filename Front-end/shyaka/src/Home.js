@@ -66,13 +66,7 @@ const Home = () => {
 
 
         <footer style={footerStyle}>
-        <section id="contact" style={sectionStyle}>
-        <h2 className="section-title" style={sectionTitleStyle}>Contact Us</h2>
-        <p style={centerTextStyle}>
-            Email: <a href="mailto:shyaka@fashionhub.com">shyaka@fashionhub.com</a>
-        </p>
-        <p style={centerTextStyle}>Phone: 0101010101019</p>
-        </section>
+
         <p>&copy; 2024 Shyaka. All Rights Reserved.</p>
         </footer>
     </div>

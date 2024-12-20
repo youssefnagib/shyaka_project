@@ -2,14 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import fetchUserData from './UserData';
 import './Dashboard.css';
+import OrdersUserList from './OrdersUserList';
+import OrderUserModel from './OrderUserModel';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 
 const Dashboard = () => {
   const [userAvailable, setUserAvailable] = useState(false);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activePage, setActivePage] = useState('profile'); // Track active page
+  const [activePage, setActivePage] = useState('profile');
   const navigate = useNavigate();
+
+  const { isWaiting, serverError, orders } = OrderUserModel('http://localhost:8000/api/orders_user/');
+  console.log(orders);
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
@@ -38,7 +45,7 @@ const Dashboard = () => {
     };
 
     getUserData();
-  }, []);
+  }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem('access_token');
@@ -50,31 +57,31 @@ const Dashboard = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="text-center">Loading...</div>;
   }
 
   return (
-    <div className="dashboard-container">
-      <div className="navbar">
+    <div className="container mt-4 -">
+      <div className="d-flex justify-content-center mb-4">
         <button
-          className={`nav-btn ${activePage === 'profile' ? 'active' : ''}`}
+          className={`btn ${activePage === 'profile' ? 'btn-primary' : 'btn-outline-primary'} me-3`}
           onClick={() => setActivePage('profile')}
         >
           Profile
         </button>
         <button
-          className={`nav-btn ${activePage === 'orders' ? 'active' : ''}`}
+          className={`btn ${activePage === 'orders' ? 'btn-primary' : 'btn-outline-primary'}`}
           onClick={() => setActivePage('orders')}
         >
           My Orders
         </button>
       </div>
 
-      <div className="content">
+      <div className="content container">
         {activePage === 'profile' ? (
           <div className="profile-page">
-            <h1>Profile Page</h1>
-            {error && <p className="error">{error}</p>}
+            <h2>Profile Page</h2>
+            {error && <p className="text-danger">{error}</p>}
             {userData ? (
               <div className="user-data">
                 <p><strong>First Name:</strong> {userData.first_name}</p>
@@ -87,16 +94,20 @@ const Dashboard = () => {
             )}
           </div>
         ) : (
-          <div className="orders-page">
-            <h1>My Orders</h1>
-            <p>You currently have no orders.</p>
+          <div className="orders-page container">
+            <h2>My Orders</h2>
+            {isWaiting && <h3>Loading orders...</h3>}
+            {serverError && <h3 className="text-danger">{serverError}</h3>}
+            {orders && <OrdersUserList orders={orders} name={userData.first_name} />}
           </div>
         )}
       </div>
 
-      <button onClick={handleLogout} className="logout-btn">
-        Log Out
-      </button>
+      <div className="text-center mt-4">
+        <button onClick={handleLogout} className="btn btn-danger">
+          Log Out
+        </button>
+      </div>
     </div>
   );
 };

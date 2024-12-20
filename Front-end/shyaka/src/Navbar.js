@@ -24,12 +24,9 @@ const Navbar = () => {
         const data = await fetchUserData();
         setUserData(data);
         setUserAvailable(true);
-        if (data) {
-            setUserData(data);
-            setUserAvailable(true);
-          } else {
-            setUserAvailable(false);
-          }
+        if (!data) {
+          setUserAvailable(false);
+        }
       } catch (err) {
         setError('Failed to load user data');
         setUserAvailable(false);
@@ -39,8 +36,7 @@ const Navbar = () => {
     };
 
     getUserData();
-  }, [userAvailable, loading]);
-
+  }, []);
 
   const defaultUser = {
     first_name: 'Guest',
@@ -54,88 +50,49 @@ const Navbar = () => {
   }
 
   return (
-    <nav style={navStyle}>
-      <Link to="/" style={logoStyle}>Shyaka</Link>
-      <ul style={menuStyle}>
-        <li style={menuItemStyle}><Link to="/" style={menuLinkStyle}>Home</Link></li>
+    <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: '#ddc6ab' }}>
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/" style={{ color: 'WHITE', fontWeight: 'bold' }}>SHYAKA</Link>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link className="nav-link" to="/">Home</Link>
+            </li>
 
-        <li className="nav-item dropdown" style={dropdownstyle}>
-          <a className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Shop Now
-          </a>
-          <ul className="dropdown-menu">
-            <li><Link to="/menproducts" className="dropdown-item">Men</Link></li>
+            <li className="nav-item dropdown">
+              <Link className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Shop Now
+              </Link>
+              <ul className="dropdown-menu">
+                <li><Link className="dropdown-item" to="/products">All Products</Link></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><Link className="dropdown-item" to="/menproducts">Men</Link></li>
+                <li><Link className="dropdown-item" to="/womenproducts">Women</Link></li>
+              </ul>
+            </li>
 
-            <li><hr className="dropdown-divider" /></li>
-            <li><Link to="/womenproducts" className="dropdown-item">Women</Link></li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/cart">Cart</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/aboutus">About Us</Link>
+            </li>
           </ul>
-        </li>
-        
-        <li style={menuItemStyle}><Link to="/cart" style={menuLinkStyle}>Cart</Link></li>
-        <li style={menuItemStyle}><Link to='/aboutus' style={menuLinkStyle}>About us</Link></li>
-      </ul>
-      {error && <div style={{ color: 'red' }}>{error}</div>} {/* Display error if any */}
-      {!userAvailable ? (
-        <Link to="/login" style={ctaStyle}>Login</Link>
-      ) : (
-        <div>
-          <Link to="/dashboard" style={ctaStyle}>{displayName}</Link>
+          {error && <div className="text-danger">{error}</div>} {/* Display error if any */}
+          {!userAvailable ? (
+            <Link to="/login" className="btn btn-outline-dark ms-2">Login</Link>
+          ) : (
+            <div>
+              <Link to="/dashboard" className="btn btn-dark ms-2">{displayName}</Link>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </nav>
   );
-};
-
-const navStyle = {
-  backgroundColor: '#ddc6ab',
-  padding: '10px 20px',
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-};
-
-const logoStyle = {
-  color: '#090909',
-  fontSize: '24px',
-  fontWeight: 'bold',
-  textDecoration: 'none',
-};
-
-const menuStyle = {
-  listStyle: 'none',
-  display: 'flex',
-  margin: 0,
-  padding: 0,
-};
-const dropdownstyle = {
-    margin: '0 15px',
-    color: 'white',
-    textDecoration: 'none',
-    fontSize: '18px',
-    fontWeight: 'bold',
-    transition: 'color 0.3s',
-}
-
-const menuItemStyle = {
-  margin: '0 15px',
-};
-
-const menuLinkStyle = {
-  color: 'white',
-  textDecoration: 'none',
-  fontSize: '18px',
-  fontWeight: 'bold',
-  transition: 'color 0.3s',
-};
-
-const ctaStyle = {
-  backgroundColor: '#938d89',
-  color: '#222',
-  padding: '10px 20px',
-  textDecoration: 'none',
-  fontWeight: 'bold',
-  borderRadius: '5px',
-  transition: 'background-color 0.3s, color 0.3s',
 };
 
 export default Navbar;

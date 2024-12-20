@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import "./Cart.css";
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+
+
 const Cart = () => {
   const [orderItems, setOrderItems] = useState([]);
 
@@ -7,7 +11,6 @@ const Cart = () => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setOrderItems(storedCart);
   }, []);
-  console.log(orderItems);
 
   const updateQuantity = (id, quantity) => {
     const updatedCart = orderItems.map((item) =>
@@ -31,13 +34,13 @@ const Cart = () => {
 
   return (
     <div>
-      <header>
+      <header className="bg-dark text-white text-center py-4">
         <h1>Your Shopping Cart</h1>
       </header>
-      <div className="container">
+      <div className="container py-4">
         {orderItems.length > 0 ? (
           <>
-            <table>
+            <table className="table table-striped">
               <thead>
                 <tr>
                   <th>Name</th>
@@ -55,10 +58,12 @@ const Cart = () => {
                     <td>{item.name}</td>
                     <td>{item.color}</td>
                     <td>{item.size}</td>
-                    <td>{item.price.toLocaleString("en-US", {
-                      style: "currency",
-                      currency: "EGP",
-                    })}</td>
+                    <td>
+                      {item.price.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "EGP",
+                      })}
+                    </td>
                     <td>
                       <input
                         type="number"
@@ -78,7 +83,7 @@ const Cart = () => {
                     </td>
                     <td>
                       <button
-                        className="btn"
+                        className="btn btn-danger"
                         onClick={() => removeItem(item.product)}
                       >
                         Remove
@@ -88,7 +93,7 @@ const Cart = () => {
                 ))}
               </tbody>
             </table>
-            <div className="total">
+            <div className="text-end mt-4">
               <strong>Total: {calculateTotal().toLocaleString("en-US", {
                 style: "currency",
                 currency: "EGP",
@@ -96,16 +101,20 @@ const Cart = () => {
             </div>
           </>
         ) : (
-          <div className="empty-cart">
+          <div className="text-center">
             <h2>Your cart is empty!</h2>
-            <a href="/menproducts" className="btn">Continue Shopping</a>
+            <a href="/products" className="btn btn-primary">
+              Continue Shopping
+            </a>
           </div>
         )}
-        <div className="actions">
-          <a href="/checkout" className="btn">Checkout</a>
+        <div className="d-flex justify-content-between mt-4">
+          <a href="/checkout" className="btn btn-success">
+            Checkout
+          </a>
         </div>
       </div>
-      <footer>
+      <footer className="bg-secondary text-white text-center py-3">
         <p>&copy; 2024 Shyaka. All Rights Reserved.</p>
       </footer>
     </div>

@@ -12,6 +12,8 @@ import WomenProducts from "./WomenProduct.js";
 import ProductInfo from "./ProductInfo.js";
 import Cart from "./Cart.js";
 import Checkout from "./Checkout.js";
+import Products from "./Product.js";
+import OrderInfo from "./OrderInfo.js";
 
 function App() {
   return (
@@ -23,9 +25,11 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/order/:id" element={<OrderInfo />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/aboutus" element={<AboutUs />} />
+      <Route path="/products" element={<Products />} />
       <Route path="/menproducts" element={<MenProducts />} />
       <Route path="/womenproducts" element={<WomenProducts />} />
       <Route path="/product/:id" element={<ProductInfo />} />

@@ -1,6 +1,8 @@
 import React from "react";
 import ProductModel from "./ProductModel";
 import { Link } from "react-router-dom";
+import LOADING from "./loading.gif"
+
 
 const WomenProducts = () => {
   const { isWaiting, serverError, products } = ProductModel(
@@ -9,7 +11,7 @@ const WomenProducts = () => {
 
   // Conditional rendering based on loading state and errors
   if (isWaiting) {
-    return <div>Loading products...</div>;
+    return <div style={loading}><img src={LOADING} alt="loading" style={loadingImageStyles} /></div>;
   }
 
   if (serverError) {
@@ -95,6 +97,20 @@ const productImageStyles = {
   borderRadius: "8px",
   height: "auto",
 };
+const loadingImageStyles = {
+  justifyContent: "center",
+  alignSelf: "center",
+  width: "25%",
+  textAlign: "center",
+  borderRadius: "8px",
+  height: "auto",
+};
+const loading = {
+  alignItems: "center",
+  justifyContent: "center",
+  display: "flex",
+  height: "550px",
+}
 
 const productNameStyles = {
   fontSize: "20px",

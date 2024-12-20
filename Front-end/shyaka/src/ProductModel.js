@@ -28,7 +28,7 @@ const ProductModel = (url) => {
           setServerError(err.message);
           setIsWaiting(false);
         });
-    }, 1000); // Adding a slight delay to simulate loading
+    }, 10000); // Adding a slight delay to simulate loading
   }, [url]);
 
   return {

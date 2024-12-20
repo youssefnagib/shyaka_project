@@ -16,6 +16,14 @@ def get_orders(request):
     serializer = OrderSerializer(order, many=True)
     return Response({'orders': serializer.data})
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_orders_user(request):
+    user = request.user
+    order = Order.objects.filter(user=user)
+    serializer = OrderSerializer(order, many=True)
+    return Response({'orders': serializer.data})
+
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
