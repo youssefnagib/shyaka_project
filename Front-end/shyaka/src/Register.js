@@ -65,7 +65,8 @@ const Register = () => {
                     navigate("/login"); // Redirect to login
                 }, 2000);
             } else {
-                setError(data.details || "Registration failed. Please try again.");
+                console.log(data)
+                setError(data.username || data.details || "Registration failed. Please try again.");
             }
         } catch (error) {
             setError("An error occurred. Please try again later.");
@@ -75,9 +76,7 @@ const Register = () => {
 
     return (
         <div>
-            {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
-            {success && <p style={{ color: "green", textAlign: "center" }}>{success}</p>}
-            <RegisterForm formData={formData} onChange={handleChange} onSubmit={handleSubmit} />
+            <RegisterForm success={success} error={error} formData={formData} onChange={handleChange} onSubmit={handleSubmit} />
         </div>
     );
 };

@@ -6,6 +6,9 @@ import OrdersUserList from './OrdersUserList';
 import OrderUserModel from './OrderUserModel';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
+import LOADING from "./loading.gif";
+
+
 
 const Dashboard = () => {
   const [userAvailable, setUserAvailable] = useState(false);
@@ -56,8 +59,12 @@ const Dashboard = () => {
     navigate('/login');
   };
 
-  if (loading) {
-    return <div className="text-center">Loading...</div>;
+  if (loading && isWaiting) {
+    return (
+      <div style={loadingimg}>
+        <img src={LOADING} alt="loading" style={loadingImageStyles} />
+      </div>
+    );;
   }
 
   return (
@@ -110,6 +117,22 @@ const Dashboard = () => {
       </div>
     </div>
   );
+};
+
+const loadingImageStyles = {
+  justifyContent: "center",
+  alignSelf: "center",
+  width: "25%",
+  textAlign: "center",
+  borderRadius: "8px",
+  height: "auto",
+};
+
+const loadingimg = {
+  alignItems: "center",
+  justifyContent: "center",
+  display: "flex",
+  height: "550px",
 };
 
 export default Dashboard;

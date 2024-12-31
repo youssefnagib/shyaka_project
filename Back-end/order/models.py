@@ -7,12 +7,12 @@ class Size(models.TextChoices):
     SMALL = 'S', 'Small'
     MEDIUM = 'M', 'Medium'
     LARGE = 'L', 'Large'
-    XLARGE = 'XL', 'Extra Large'
+    XLARGE = 'XL', 'X-Large'
 
 
 class Color(models.TextChoices):
-    GRAY = 'gray'
-    WHITE = 'white'
+    GRAY = 'Gray'
+    WHITE = 'White'
     BLACK = 'Black'
     CAFE = 'CAFE'
 
@@ -20,6 +20,7 @@ class OrderStatus(models.TextChoices):
     PROCESSING = "Processing"
     SHIPPED = "Shipped"
     DELIVERED = "Delivered"
+    CANCELLED = "Cancelled"
 
 class PaymentStatus(models.TextChoices):
     PAID = 'Paid'

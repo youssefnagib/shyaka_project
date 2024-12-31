@@ -9,5 +9,4 @@ class ProductFilter(django_filters.FilterSet):
 
     class Meta:
         model = Product
-        # fields = ['brand', 'category']
         fields = ('gender', 'category', 'keyword', "minPrice", "maxPrice")

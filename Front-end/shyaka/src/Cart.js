@@ -10,6 +10,7 @@ const Cart = () => {
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setOrderItems(storedCart);
+    localStorage.removeItem("alertcart");
   }, []);
 
   const updateQuantity = (id, quantity) => {

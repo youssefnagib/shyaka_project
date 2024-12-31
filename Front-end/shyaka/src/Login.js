@@ -48,7 +48,8 @@ const Login = () => {
                 window.location.reload(); 
                 // Redirect or handle successful login here
             } else {
-                setError(data.error || "Login failed. Please try again.");
+                console.log(data);
+                setError(data.detail || "Login failed. Please try again.");
             }
         } catch (error) {
             setError("An error occurred. Please try again later.");

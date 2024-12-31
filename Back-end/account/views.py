@@ -6,14 +6,26 @@ from rest_framework.response import Response
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
 from .serializer import UserSerializer, SignUpSerializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.utils.crypto import get_random_string
 from django.core.mail import send_mail
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 
+# login
+class CustomTokenObtainPairView(TokenObtainPairView):
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        try:
+            serializer.is_valid(raise_exception=True)
+        except Exception as e:
+             return Response({"detail": "Invalid username or password"}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
-# Make register view for new users
+
+
+# register
 @api_view(['POST'])
 def register(request):
     data = request.data
@@ -50,16 +62,24 @@ def register(request):
             status=status.HTTP_400_BAD_REQUEST
             )
 
-
+# get current user
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def current_user(request):
     user = UserSerializer(request.user, many=False)
-    return Response(user.data)
+    if request.user.groups.filter(name='admin').exists():
+        role = 'Admin'
+    elif request.user.groups.filter(name='customer').exists():
+        role = 'Customer'
+    else:
+        role = 'Unknown'
+    response_data = {**user.data, 'role': role}
+    return Response(response_data)
 
 
+# update user for admin but not used yet
 @api_view(['PUT'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsAdminUser])
 def update_user(request):
     user = request.user
     data = request.data
@@ -90,6 +110,8 @@ def get_current_host(request):
     return f'{protocol}://{host}/'
 
 
+
+# for user if forget password but still not used in website
 @api_view(['POST'])
 def forget_pass(request):
     data = request.data
@@ -111,6 +133,7 @@ def forget_pass(request):
     return Response({'details': 'Password reset sent to {email}'.format(email=data['email'])})
 
 
+# for user if want to reset password but not used
 @api_view(['POST'])
 def reset_pass(request, token):
     data = request.data

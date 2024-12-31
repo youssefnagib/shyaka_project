@@ -14,8 +14,15 @@ import Cart from "./Cart.js";
 import Checkout from "./Checkout.js";
 import Products from "./Product.js";
 import OrderInfo from "./OrderInfo.js";
+import AdminProducts from "./AdminProducts.js";
+import UpdateProduct from "./UpdateProduct.js";
+import AddProduct from "./AddProduct.js";
+import Analysis from "./Analysis.js";
+import AdminOrders from "./AdminOrders.js";
+import Chatbot from "./Chatbot.js";
 
 function App() {
+  
   return (
 <BrowserRouter>
   <div>
@@ -29,12 +36,18 @@ function App() {
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/aboutus" element={<AboutUs />} />
+      <Route path="/analysis" element={<Analysis />} />
       <Route path="/products" element={<Products />} />
+      <Route path="/addproduct" element={<AddProduct />} />
+      <Route path="/adminproducts" element={<AdminProducts />} />
+      <Route path="/adminorders" element={<AdminOrders />} />
+      <Route path="/updateproduct/:id" element={<UpdateProduct />} />
       <Route path="/menproducts" element={<MenProducts />} />
       <Route path="/womenproducts" element={<WomenProducts />} />
       <Route path="/product/:id" element={<ProductInfo />} />
 
     </Routes>
+    <Chatbot />
   </div>
 </BrowserRouter>
   );

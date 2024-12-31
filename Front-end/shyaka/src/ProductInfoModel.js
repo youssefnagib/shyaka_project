@@ -16,9 +16,9 @@ const ProductsInfoModel = (url) => {
         })
         .then((data) => {
           
-          // Check if 'products' exists in the data and access its properties
+          // Check if 'products' exists in the data and access its properties and set product
           if (data && data.products) {
-            setProduct(data.products); // Set the 'products' object
+            setProduct(data.products);
             setIsWaiting(false);
           } else {
             setServerError("Unexpected response format");
@@ -29,16 +29,15 @@ const ProductsInfoModel = (url) => {
           setServerError(err.message);
           setIsWaiting(false);
         });
-    }, 2000); // Adding a slight delay to simulate loading
+    }, 2000);
 
-    // Cleanup the timeout when the component unmounts or before a new effect runs
     return () => clearTimeout(timer);
   }, [url]);
 
   return {
     isWaiting,
     serverError,
-    product, // Return the product object
+    product,
   };
 };
 

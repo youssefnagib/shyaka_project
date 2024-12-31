@@ -4,7 +4,7 @@ import OrderInfoModel from "./OrderInfoModel";
 const OrderInfo = () => {
   const { id } = useParams(); // Retrieve the order ID from the URL parameters
   const { isWaiting, serverError, order } = OrderInfoModel(
-    `http://localhost:8000/api/orders/${id}/`
+    `http://localhost:8000/api/orders_user/${id}/`
   );
 
   console.log(order); // Logs the order information for debugging purposes

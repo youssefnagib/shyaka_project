@@ -1,6 +1,6 @@
 import React from "react";
 
-const RegisterForm = ({ formData, onChange, onSubmit }) => {
+const RegisterForm = ({success, error, formData, onChange, onSubmit }) => {
     return (
         <div style={{
             display: "flex",
@@ -18,6 +18,8 @@ const RegisterForm = ({ formData, onChange, onSubmit }) => {
                 maxWidth: "400px"
             }}>
                 <h1 style={{ textAlign: "center", color: "#333", marginBottom: "20px" }}>Register</h1>
+                {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+                {success && <p style={{ color: "green", textAlign: "center" }}>{success}</p>}
                 <form onSubmit={onSubmit}>
                     <div className="form-group">
                         <label htmlFor="first_name">First Name</label>

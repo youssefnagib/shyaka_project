@@ -44,18 +44,7 @@ table td img {
     font-size: 18px;
     color: #333;
 }
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    text-align: center;
-}
-.btn:hover {
-    background-color: #555;
-}
+
 .actions {
     display: flex;
     justify-content: space-between;

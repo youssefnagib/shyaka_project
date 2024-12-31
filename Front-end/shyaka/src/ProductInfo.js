@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ProductInfoModel from "./ProductInfoModel";
 import "./ProductInfo.css";
+import LOADING from "./loading.gif"
 
 const ProductInfo = () => {
   const { id } = useParams();
@@ -16,7 +17,11 @@ const ProductInfo = () => {
     price.toLocaleString("en-US", { style: "currency", currency: "EGP" });
 
   if (isWaiting) {
-    return <div>Loading...</div>;
+    return (
+      <div style={loading}>
+        <img src={LOADING} alt="loading" style={loadingImageStyles} />
+      </div>
+    );;
   }
 
   if (serverError) {
@@ -41,6 +46,7 @@ const ProductInfo = () => {
       color: color,
       quantity: 1,
     };
+    console.log(orderItem);
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -55,10 +61,19 @@ const ProductInfo = () => {
     } else {
       cart.push(orderItem);
     }
+    
+    let alertcart = localStorage.getItem('alertcart')
+    if (alertcart){
+      localStorage.removeItem('alertcart');
+      localStorage.setItem('alertcart', parseInt(alertcart) +1 );
+    }else{
+      localStorage.setItem('alertcart', 1 );
+    }
 
     localStorage.setItem("cart", JSON.stringify(cart));
     alert(`Product added to cart with Size: ${size}, Color: ${color}`);
-    navigate("/cart");
+    navigate("/products");
+    window.location.reload();
   };
 
   return (
@@ -84,10 +99,10 @@ const ProductInfo = () => {
               onChange={(e) => setSize(e.target.value)}
             >
               <option value="">Select Size</option>
-              <option value="small">Small</option>
-              <option value="medium">Medium</option>
-              <option value="large">Large</option>
-              <option value="xlarge">X-Large</option>
+              <option value="Small">Small</option>
+              <option value="Medium">Medium</option>
+              <option value="Large">Large</option>
+              <option value="X-Large">X-Large</option>
             </select>
 
             <label htmlFor="color">Color</label>
@@ -97,9 +112,11 @@ const ProductInfo = () => {
               onChange={(e) => setColor(e.target.value)}
             >
               <option value="">Select Color</option>
-              <option value="black">Black</option>
-              <option value="white">White</option>
-              <option value="blue">Blue</option>
+              <option value="Black">Black</option>
+              <option value="White">White</option>
+              <option value="Gray">Gray</option>
+              <option value="CAFE">CAFE</option>
+
             </select>
           </div>
 
@@ -110,6 +127,23 @@ const ProductInfo = () => {
       </div>
     </div>
   );
+};
+
+// styles 
+const loadingImageStyles = {
+  justifyContent: "center",
+  alignSelf: "center",
+  width: "25%",
+  textAlign: "center",
+  borderRadius: "8px",
+  height: "auto",
+};
+
+const loading = {
+  alignItems: "center",
+  justifyContent: "center",
+  display: "flex",
+  height: "550px",
 };
 
 export default ProductInfo;

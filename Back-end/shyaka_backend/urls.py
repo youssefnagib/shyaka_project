@@ -18,14 +18,14 @@ from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.urls import path, include
-from rest_framework_simplejwt.views import TokenObtainPairView
+from account.views import CustomTokenObtainPairView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('account.urls')),
     path('api/', include('product.urls')),
     path('api/', include('order.urls')),
-    path('api/login/', TokenObtainPairView.as_view()),
+    path('api/login/', CustomTokenObtainPairView.as_view()),
 ]
 
 handler404 = 'utils.error_view.handler404'
