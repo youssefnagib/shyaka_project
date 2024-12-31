@@ -1,5 +1,55 @@
 # Getting Started with Create React App
 
+# Shyaka Project - Frontend
+
+## Introduction
+
+The frontend of the Shyaka Project provides the user interface for the application. It is built using React.js and leverages modern libraries like Bootstrap for styling and Axios for API communication.
+
+---
+
+## Setup Instructions
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/youssefnagib/shyaka_project.git
+cd shyaka_project/Front-end
+```
+
+### Install Dependencies
+
+Ensure you have Node.js installed (version 16 or above recommended). Then, run the following command:
+
+```bash
+npm install
+```
+
+### Run the Development Server
+
+Start the React development server:
+
+```bash
+npm start
+```
+
+This will open the application in your default web browser, typically at `http://localhost:3000`.
+
+---
+
+## Folder Structure
+
+- **src/components**: Contains reusable components.
+- **src/pages**: Contains the main pages of the application.
+- **src/styles**: Contains CSS and styling files.
+- **src/utils**: Contains utility functions such as API handlers.
+
+---
+
+## Contributing
+
+We welcome contributions! Please submit issues or pull requests, and refer to [CONTRIBUTING.md](../CONTRIBUTING.md) for more details.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -8,23 +58,23 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
+The page will reload when you make changes.
 You may also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
+Launches the test runner in the interactive watch mode.
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `build` folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
+The build is minified and the filenames include the hashes.
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
