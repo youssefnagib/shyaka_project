@@ -73,7 +73,7 @@ Shyaka Project is a full-stack web application designed to manage user profiles,
  - Interact with API endpoints at [http://localhost:8000/api/].
 
 ### Project Structure
-    ```vbnet
+    
     shyaka_project/
     │
     ├── Back-end/
@@ -91,7 +91,7 @@ Shyaka Project is a full-stack web application designed to manage user profiles,
     │       └── App.js
     │
     └── README.md
-    ```
+    
 
 ### License
 This project is licensed under the MIT License. See the LICENSE file for details.
@@ -101,7 +101,7 @@ Contributions are welcome! Please open an issue or submit a pull request for imp
 
 ### Contact
 For questions or feedback, please contact [youssefnagib].
-    ```vbnet
     
+
     Copy and paste the content into a file named `README.md`. Let me know if you need further adjustments!
-    ```
+
