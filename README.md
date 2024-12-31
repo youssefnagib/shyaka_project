@@ -32,12 +32,11 @@ Shyaka Project is a full-stack web application designed to manage user profiles,
    ```bash
    git clone https://github.com/youssefnagib/shyaka_project.git
    cd shyaka_project/Back-end
-```
-###
+   ```
 2. Create a virtual environment:
    ```bash
 conda create --name shyaka_project python=3.8
 conda activate shyaka_project
-```
+    ```
 
 Install dependencies:
